@@ -1,0 +1,51 @@
+{% extends 'index.html' %}
+
+{% block style %}
+<style>
+
+    .fm1{
+      padding-left: 2.1rem;
+    }
+    .form-control-feedback {
+      padding-top: 0.85rem;
+        position: absolute;
+        z-index: 2;
+        display: block;
+        width: 2.375rem;
+        height: 2.375rem;
+        line-height: 2.375rem;
+        text-align: center;
+        pointer-events: none;
+        color: #aaa;
+    }
+</style>
+
+
+{% endblock %}
+
+{% block body %}
+<div class="container">
+<div class="row">
+  <div style="margin:auto ; margin-top: 3rem;" class="col-md-6">
+<form id="form" method="POST" action="{{ url_for('create') }}">
+  {% if error  %}
+      <span style="text-align: center;" class="text-danger">{{error}}: <a class="text-info" href="{{ url_for('chatroom', chat=channel ) }}">{{channel}}</a></span>
+  {% endif %} 
+  <div class="form-group">
+       
+            <input type="text" class="form-control" placeholder="Channel" name='cha' id='channel'>            
+        
+        </div>
+        <div class="form-group">
+
+                <textarea placeholder="Description" name="desc" class="form-control" id="Textarea" rows="2"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary btn-lg btn-block">New Channel</button>
+
+</form>
+
+</div>
+</div>
+</div>
+
+{% endblock %}

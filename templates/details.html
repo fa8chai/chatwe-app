@@ -1,0 +1,33 @@
+{% extends 'index.html' %}
+{% block style2 %}
+<style>
+    .ho:hover{
+        color: gray;
+    }
+</style>
+
+
+{% endblock %}
+{% block body %}
+<div  class="container">
+
+    <div style="text-align: center;">
+        <a class="hover2" style="text-decoration: none;color:black" href="{{ url_for('chatroom',chat=channel.name) }}"><h4 class="ho" style="border-bottom: black solid 1px;">{{channel.name}}</h4></a>
+        <h5 style="color: rgb(127, 35, 150);margin-top:10px">{{channel.desc}}</h5>
+        <div class="mt-4">by: {{channel.user}}</div>
+        <div>created: {{channel.time}}</div>
+        <h4 style="margin:2rem"><span class="badge badge-lg badge-dark">Users <span class="badge badge-light">{{users_count}}</span></span></h4>
+
+    </div>
+
+{% if users %}
+<ul class="list-group list-group-flush">
+{% for user in users %}
+
+<li class="list-group-item">{{user.name}}</li>
+
+{% endfor %}
+</ul>
+{% endif %}
+</div>
+{% endblock %}

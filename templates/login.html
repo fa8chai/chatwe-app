@@ -1,0 +1,62 @@
+{% extends 'index.html' %}
+{% block style %}
+<style>
+
+  .form-control:focus{
+    border-color:rgb(71, 109, 0) ;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(32, 143, 60, 0.6)
+  }
+
+
+</style>
+
+
+{% endblock %}
+
+
+{% block search %}
+<div class="text-white">Wellcome!</div>
+
+{% endblock %}
+
+
+{% block user %}
+
+{% endblock %}
+{% block body %}
+<div class="container-fluid">
+    
+          <div class="container">
+            <h5 style="color: rgb(71, 109, 0); text-align:center">Chatwe</h5>
+            <div style="border-top: gray 0.7px solid;" class="row mt-4 pt-4">
+              <div style="margin:auto" class="col-md-7 ">
+                <h4 style="text-align: center; color:rgb(71, 109, 0)" class="login-heading mt-4 ">Log in to start chatting </h4>
+                <form method="POST" action="{{ url_for('login') }}">
+                  {% if error %}
+                  <div class="d-flex justify-content-center"><span style="background-color: rgb(255, 189, 181);padding:3px" class="text-dark" >{{error}}</span></div>
+                  {% endif %}
+
+                  <div style="margin-top: 3rem;" class="form-label-group">
+                    
+
+                    <input name="name" type="text" id="inputText" class="form-control" placeholder="Username" required autofocus>
+                  </div>
+                  <div  style="margin-top: 2rem;" class="form-label-group mb-4">
+                     
+                    
+                    <input name="email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required>
+                  </div>
+  
+  
+                  
+                  <button style="background-color: rgb(71, 109, 0);" class="btn btn-lg btn-block btn-login text-white  mb-2" type="submit">Log In</button>
+                  <div class="text-center">
+                    
+                </form>
+              </div>
+            </div>
+      
+        
+     
+  </div>
+{% endblock %}

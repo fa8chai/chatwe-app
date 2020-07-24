@@ -1,0 +1,26 @@
+body {
+    overflow-x: hidden;
+   
+  }
+.fm1{
+  padding-left: 2.375rem;
+}
+.form-control-feedback {
+  padding-top: 10px;
+  padding-left:4px ;
+  padding-right: 4px;
+    position: absolute;
+    z-index: 2;
+    display: block;
+    width: 2.375rem;
+    height: 2.375rem;
+    line-height: 2.375rem;
+    text-align: center;
+    pointer-events: none;
+    color: #aaa;
+}
+.yg:hover{
+  color:gray;
+  background-color: rgb(245, 245, 245);
+}
+

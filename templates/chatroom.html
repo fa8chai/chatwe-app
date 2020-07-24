@@ -1,0 +1,114 @@
+{% extends 'index.html' %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static',filename='chatroom.css') }}">
+{% endblock %}
+
+{% block scri %}
+<script src="{{ url_for('static',filename='chatroom.js') }}" ></script>
+<script>
+    document.addEventListener('DOMContentLoaded',()=>{
+
+      var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
+
+      socket.on('left',data=>{
+
+        var ldiv = document.createElement('div');
+        ldiv.classList.add("alert","alert2","alert-warning","alert-dismissible","fade","show");
+        ldiv.innerHTML= data['msg']
+        ldiv.style.width="100%";
+        ldiv.style.height="auto";
+        ldiv.style.margin="0px";
+        ldiv.style.padding="7px";
+        ldiv.style.fontWeight="bold";
+        ldiv.style.textAlign="center";
+        document.querySelector('.list2').append(ldiv);
+      
+        document.querySelector('.leave').style.display="none"
+        document.querySelector('.join').style.display="block";
+
+        setTimeout(function() {
+            $(".alert2").alert('close');
+        }, 4000);
+        
+
+    }) 
+
+
+
+    })
+</script>
+
+
+
+{% endblock %}
+
+{% block channel %}
+<i class=" nav-link mr-1"><a class="namech text-white" href="{{ url_for('details',chat=channel.name) }}">{{channel.name}}</a></i><span class="sr-only">(current)</span>
+{% endblock %}
+
+{% block join %}
+
+
+   {% if yes %}
+      <button type="button"  class=" leave btn btn-danger mr-1  ">Leave</button>
+      <button style="display: none;" type="button" id="color" class=" join btn btn-warning mr-1  ">Join</button>
+  
+    {% else %}
+       <button style="display: none;" type="button"  class=" leave btn btn-danger mr-1 ">Leave</button>
+       <button  type="button" id="color" class=" join btn btn-warning mr-1 ">Join</button>
+    {% endif %}
+
+{% endblock %}
+
+{% block body %}
+<div style="position: fixed;z-index:2;top:3.4rem;width:100%;margin:0px" class="list2"></div>
+<div class="container">
+              <div id="chatbox">
+              
+                <div style="margin-bottom: 9rem;" class="row">
+                  <div class="col-md-12">
+                    
+
+                        <div id="messageList">
+                              {% if messages %}
+                              {%  for message in messages %}
+                              {% if message.user.name == username %}
+                              <div class="chatm me">
+                                  <h6>{{message.user.name}}</h6>
+                                  <p>{{message.message}}</p>
+                                  <small>{{message.time}}</small>
+                                </div>
+                              {% else %}
+                              <div class="chatm">
+                                <h6>{{message.user.name}}</h6>
+                                <p>{{message.message}}</p>
+                                <small>{{message.time}}</small>
+                              </div>
+
+                              {% endif %}
+                                  {% endfor %}
+                             {% endif %}
+                        </div>
+                        
+
+                        <hr>
+                        
+                    
+                  </div>
+<div  class="container">
+  
+                  <div style="  position: fixed;margin:auto; bottom:5rem;width:80%;z-index:2" id="sendMessage">
+                      <div class='input-group'>
+                        <textarea style="text-align: left;" rows="2" type='text' name='message' class=" message form-control" placeholder="Type your message..."></textarea>
+                        <div class='input-group-append'>
+                          <button class='btn8 btn btn-primary'>Send</button>
+                        </div>
+                      </div>
+                    </div>
+                    </div>
+                </div>
+              </div>
+              <div id="end"></div>
+         
+{% endblock %}

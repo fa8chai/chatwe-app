@@ -1,0 +1,68 @@
+{% extends 'index.html' %}
+{% block style %}
+<style>
+
+    .fm1{
+      padding-left: 2.1rem;
+    }
+    .form-control-feedback {
+      padding-top: 0.85rem;
+        position: absolute;
+        z-index: 2;
+        display: block;
+        width: 2.375rem;
+        height: 2.375rem;
+        line-height: 2.375rem;
+        text-align: center;
+        pointer-events: none;
+        color: #aaa;
+    }
+</style>
+
+
+{% endblock %}
+
+
+{% block body %}
+<div class="container">
+
+{% if channels %}
+
+<div class='container mt-4 pt-4'>
+    <h6 style="margin-bottom: 3rem;" class="text-primary ">Search Results:</h6>
+     <div class="list-group list-group-flush">
+                {% for cha in channels %}
+                <div style="margin-bottom: 3rem;" class="row">
+                    <div style="margin:auto" class="col-md-12">
+                <a  style="border-top:solid 1px rgb(168, 168, 168)" href="{{ url_for('chatroom',chat= cha.name  ) }}" class="list-group-item list-group-item-action flex-column align-items-start">
+                    <h5 class="mb-1">{{cha.name}}
+                       {% if cha.user == username %} 
+                       <small  class="text-secondary">by me</small>
+                       {% else %}
+                       <small  class="text-secondary">by {{cha.user}}</small>
+
+                       {% endif %}
+                      </h5>
+                  
+                    <p class="mb-1">{{cha.desc}}</p>
+                    <small style="position:absolute;right:3px;bottom:10px">created on {{cha.time}}</small>
+                </a>
+                </div>
+                </div>
+                {% endfor %}
+            
+     </div>
+</div>
+{% else %}
+<div class="container">
+<div class="row">
+<div style="text-align: center;" class="col-sm-12 ">
+<h6 class="text-danger" style="margin-bottom: 3rem;margin-top:3rem">no channels</h6>
+<h6>Create<a class="text-info" href="{{ url_for('create') }}"> New Channel</a> </h6>
+</div>
+</div>
+</div>
+{% endif %}
+
+</div>
+{% endblock %}
